@@ -16,6 +16,12 @@ resource "vault_auth_backend" "gcp_admin" {
   path = "gcp_admin"
   type = "gcp"
 }
+# If case the Vault listener runs outside GCP platform, the following auth backend resource should be used instead:
+#resource "vault_gcp_auth_backend" "gcp_admin" {
+#  credentials = <credentials>
+#}
+# The credentials should be tied to a service account which needs `serviceaccount.admin` permissions.
+# The credentials can be provided as a JSON file or as a data source `vault_generic_secret`.
 
 resource "vault_policy" "admin" {
   name   = "admin"
